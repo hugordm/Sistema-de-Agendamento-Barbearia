@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://sistema-de-agendamento-barbearia-1-oako.onrender.com";
 
 function getToken() {
   return localStorage.getItem("token");
