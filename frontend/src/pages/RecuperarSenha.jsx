@@ -11,7 +11,7 @@ export default function RecuperarSenha() {
     setErro("");
     setMensagem("");
 
-    const res = await fetch("http://localhost:3000/recuperar-senha", {
+    const res = await fetch(`${API_URL}/recuperar-senha`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

@@ -23,7 +23,7 @@ export default function NovaSenha() {
       return;
     }
 
-    const res = await fetch("http://localhost:3000/nova-senha", {
+    const res = await fetch(`${API_URL}/nova-senha`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, senha }),

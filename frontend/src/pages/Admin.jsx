@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getTodosAgendamentos, getServicos, getConfiguracoes, atualizarConfiguracoes, deletarAgendamento } from "../services/api";
 import "./Admin.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Admin() {
   const [agendamentos, setAgendamentos] = useState([]);
   const [servicos, setServicos] = useState([]);
@@ -41,7 +43,7 @@ export default function Admin() {
     setErro("");
     setSucesso("");
 
-    const res = await fetch("http://localhost:3000/servicos", {
+    const res = await fetch(`${API_URL}/servicos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +67,7 @@ export default function Admin() {
   }
 
   async function handleDeletarServico(id) {
-    await fetch(`http://localhost:3000/servicos/${id}`, {
+    await fetch(`${API_URL}/servicos/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${getToken()}` },
     });
@@ -73,7 +75,7 @@ export default function Admin() {
   }
 
   async function handleStatus(id, status) {
-    await fetch(`http://localhost:3000/agendamentos/${id}`, {
+    await fetch(`${API_URL}/agendamentos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
