@@ -1,0 +1,52 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: #242424;
+  border-radius: 16px;
+  border: 1px solid #333;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-topo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-topo h1 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.login-topo p {
+  color: #888;
+  font-size: 14px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form button {
+  margin-top: 8px;
+}
+
+.login-rodape {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #888;
+  font-size: 14px;
+}
+
+.login-erro {
+  margin-top: 12px;
+  text-align: center;
+}

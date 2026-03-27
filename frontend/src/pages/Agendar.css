@@ -1,0 +1,110 @@
+.agendar-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.agendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.agendar-header h1 {
+  font-size: 22px;
+}
+
+.agendar-form-card {
+  background: #242424;
+  border-radius: 16px;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.agendar-form-card h2 {
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.agendar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.barbearia-fechada {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.barbearia-fechada p.icone {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.barbearia-fechada p.titulo {
+  color: #e05555;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.barbearia-fechada p.subtitulo {
+  color: #888;
+  font-size: 14px;
+}
+
+.agendamentos-titulo {
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.agendamento-card {
+  background: #242424;
+  border-radius: 12px;
+  border: 1px solid #333;
+  padding: 1rem 1.25rem;
+  margin-bottom: 12px;
+}
+
+.agendamento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agendamento-card-header p {
+  font-weight: 500;
+}
+
+.agendamento-card-data {
+  color: #888;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.agendamento-card-preco {
+  color: #C9A84C;
+  font-size: 14px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.sem-agendamentos {
+  color: #888;
+  font-size: 14px;
+}
+
+.btn-cancelar-agendamento {
+  margin-top: 10px;
+  padding: 6px 14px;
+  font-size: 13px;
+  background: transparent;
+  color: #e05555;
+  border: 1px solid #e05555;
+}
