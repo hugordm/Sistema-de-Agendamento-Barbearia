@@ -220,7 +220,8 @@ app.post("/recuperar-senha", async (req, res) => {
   await pool.query("DELETE FROM recuperacao_senha WHERE user_id = $1", [usuario.id]);
   await pool.query("INSERT INTO recuperacao_senha (user_id, token, expira_em) VALUES ($1, $2, $3)", [usuario.id, token, expira]);
 
-  const link = `http://localhost:5173/nova-senha?token=${token}`;
+  const link = `https://sistema-de-agendamento-barbearia-6kv9epi28.vercel.app/nova-senha?token=${token}`;
+
 
   try {
     await transporter.sendMail({
@@ -261,6 +262,8 @@ app.post("/nova-senha", async (req, res) => {
   await pool.query("DELETE FROM recuperacao_senha WHERE token = $1", [token]);
   res.json({ mensagem: "Senha alterada com sucesso!" });
 });
+
+
 
 iniciarBanco().then(() => {
   app.listen(3000, () => console.log("Servidor rodando na porta 3000"));
