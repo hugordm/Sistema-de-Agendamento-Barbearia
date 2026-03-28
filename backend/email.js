@@ -6,6 +6,7 @@ const transporter = nodemailer.createTransport({
     user: "barbeariapirulitodocorte@gmail.com",
     pass: process.env.EMAIL_PASS,
   },
+  family: 4,
 });
 
 async function enviarEmailConfirmacao(emailCliente, nomeCliente, servico, data, horario) {
