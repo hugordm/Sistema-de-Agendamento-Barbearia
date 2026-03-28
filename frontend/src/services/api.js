@@ -109,3 +109,35 @@ export async function deletarAgendamento(id) {
   });
   return res.json();
 }
+
+export async function criarServico(nome, preco, duracao_minutos) {
+  const res = await fetch(`${API_URL}/servicos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getToken(),
+    },
+    body: JSON.stringify({ nome, preco, duracao_minutos }),
+  });
+  return res.json();
+}
+
+export async function deletarServico(id) {
+  const res = await fetch(`${API_URL}/servicos/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + getToken() },
+  });
+  return res.json();
+}
+
+export async function atualizarStatusAgendamento(id, status) {
+  const res = await fetch(`${API_URL}/agendamentos/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getToken(),
+    },
+    body: JSON.stringify({ status }),
+  });
+  return res.json();
+}

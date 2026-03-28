@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTodosAgendamentos, getServicos, getConfiguracoes, atualizarConfiguracoes, deletarAgendamento } from "../services/api";
+import { getTodosAgendamentos, getServicos, getConfiguracoes, atualizarConfiguracoes, deletarAgendamento, criarServico, deletarServico, atualizarStatusAgendamento } from "../services/api";
 import "./Admin.css";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Admin() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -42,23 +40,8 @@ export default function Admin() {
     e.preventDefault();
     setErro("");
     setSucesso("");
-
-    const res = await fetch(`${API_URL}/servicos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-      body: JSON.stringify({ nome: nomeServico, preco: Number(preco), duracao_minutos: Number(duracao) }),
-    });
-
-    const data = await res.json();
-
-    if (data.erro) {
-      setErro(data.erro);
-      return;
-    }
-
+    const data = await criarServico(nomeServico, Number(preco), Number(duracao));
+    if (data.erro) { setErro(data.erro); return; }
     setSucesso("Serviço criado com sucesso!");
     setNomeServico("");
     setPreco("");
@@ -67,22 +50,12 @@ export default function Admin() {
   }
 
   async function handleDeletarServico(id) {
-    await fetch(`${API_URL}/servicos/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${getToken()}` },
-    });
+    await deletarServico(id);
     carregar();
   }
 
   async function handleStatus(id, status) {
-    await fetch(`${API_URL}/agendamentos/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-      body: JSON.stringify({ status }),
-    });
+    await atualizarStatusAgendamento(id, status);
     carregar(filtroData);
   }
 
