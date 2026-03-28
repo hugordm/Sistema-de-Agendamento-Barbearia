@@ -1,17 +1,10 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "barbeariapirulitodocorte@gmail.com",
-    pass: process.env.EMAIL_PASS,
-  },
-  family: 4,
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function enviarEmailConfirmacao(emailCliente, nomeCliente, servico, data, horario) {
-  await transporter.sendMail({
-    from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <onboarding@resend.dev>",
     to: emailCliente,
     subject: "Agendamento confirmado!",
     html: `
@@ -31,8 +24,8 @@ async function enviarEmailConfirmacao(emailCliente, nomeCliente, servico, data, 
 }
 
 async function enviarEmailCancelamento(emailCliente, nomeCliente, servico, data, horario) {
-  await transporter.sendMail({
-    from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <onboarding@resend.dev>",
     to: emailCliente,
     subject: "Agendamento cancelado",
     html: `
@@ -51,4 +44,21 @@ async function enviarEmailCancelamento(emailCliente, nomeCliente, servico, data,
   });
 }
 
-module.exports = { enviarEmailConfirmacao, enviarEmailCancelamento, transporter};
+async function enviarEmailRecuperacao(emailCliente, link) {
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <onboarding@resend.dev>",
+    to: emailCliente,
+    subject: "Recuperação de senha",
+    html: `
+      <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto;">
+        <h2 style="color: #C9A84C;">Barbearia Pirulito do Corte</h2>
+        <p>Você solicitou a recuperação de senha.</p>
+        <p>Clique no botão abaixo para criar uma nova senha. O link expira em 30 minutos.</p>
+        <a href="${link}" style="display: inline-block; background: #C9A84C; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500; margin: 1rem 0;">Criar nova senha</a>
+        <p>Se não foi você, ignore este email.</p>
+      </div>
+    `,
+  });
+}
+
+module.exports = { enviarEmailConfirmacao, enviarEmailCancelamento, enviarEmailRecuperacao };

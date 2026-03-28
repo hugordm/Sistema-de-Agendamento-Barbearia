@@ -4,7 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { pool, iniciarBanco } = require("./database");
-const { enviarEmailConfirmacao, enviarEmailCancelamento, transporter } = require("./email");
+const { enviarEmailConfirmacao, enviarEmailCancelamento, enviarEmailRecuperacao } = require("./email");
 
 const SECRET = process.env.SECRET;
 
@@ -222,22 +222,8 @@ app.post("/recuperar-senha", async (req, res) => {
 
   const link = `https://sistema-de-agendamento-barbearia-6kv9epi28.vercel.app/nova-senha?token=${token}`;
 
-
   try {
-    await transporter.sendMail({
-      from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
-      to: email,
-      subject: "Recuperação de senha",
-      html: `
-        <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto;">
-          <h2 style="color: #C9A84C;">Barbearia Pirulito do Corte</h2>
-          <p>Você solicitou a recuperação de senha.</p>
-          <p>Clique no botão abaixo para criar uma nova senha. O link expira em 30 minutos.</p>
-          <a href="${link}" style="display: inline-block; background: #C9A84C; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500; margin: 1rem 0;">Criar nova senha</a>
-          <p>Se não foi você, ignore este email.</p>
-        </div>
-      `,
-    });
+    await enviarEmailRecuperacao(email, link);
   } catch (err) {
     console.error("Erro ao enviar email:", err.message);
     return res.status(500).json({ erro: "Erro ao enviar email" });
@@ -245,6 +231,7 @@ app.post("/recuperar-senha", async (req, res) => {
 
   res.json({ mensagem: "Email de recuperação enviado!" });
 });
+
 
 app.post("/nova-senha", async (req, res) => {
   const { token, senha } = req.body;
