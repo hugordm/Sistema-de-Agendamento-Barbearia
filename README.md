@@ -2,7 +2,7 @@
 
 Sistema de agendamento online para barbearia, desenvolvido com React no frontend e Node.js no backend.
 
-🔗 **Demo:** [sistema-de-agendamento-barbearia-6kv9epi28.vercel.app](https://sistema-de-agendamento-barbearia-6kv9epi28.vercel.app)
+🔗 **Demo:** [sistema-de-agendamento-barbearia.vercel.app](https://sistema-de-agendamento-barbearia.vercel.app/)
 
 ---
 
