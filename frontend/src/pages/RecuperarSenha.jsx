@@ -14,7 +14,7 @@ export default function RecuperarSenha() {
     setErro("");
     setMensagem("");
 
-    const res = await fetch(`${API_URL}/recuperar-senha`, {
+    const res = await fetch((import.meta.env.VITE_API_URL || "https://sistema-de-agendamento-barbearia-1-oako.onrender.com") + "/recuperar-senha", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

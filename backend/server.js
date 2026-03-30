@@ -220,7 +220,7 @@ app.post("/recuperar-senha", async (req, res) => {
   await pool.query("DELETE FROM recuperacao_senha WHERE user_id = $1", [usuario.id]);
   await pool.query("INSERT INTO recuperacao_senha (user_id, token, expira_em) VALUES ($1, $2, $3)", [usuario.id, token, expira]);
 
-  const link = `https://sistema-de-agendamento-barbearia-6kv9epi28.vercel.app/nova-senha?token=${token}`;
+  const link = `https://sistema-de-agendamento-barbearia.vercel.app/nova-senha?token=${token}`;
 
   try {
     await enviarEmailRecuperacao(email, link);
