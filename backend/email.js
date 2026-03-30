@@ -1,17 +1,10 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  auth: {
-    user: process.env.BREVO_USER,
-    pass: process.env.BREVO_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function enviarEmailConfirmacao(emailCliente, nomeCliente, servico, data, horario) {
-  await transporter.sendMail({
-    from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <contato@pirulitodocorte.xyz>",
     to: emailCliente,
     subject: "Agendamento confirmado!",
     html: `
@@ -31,8 +24,8 @@ async function enviarEmailConfirmacao(emailCliente, nomeCliente, servico, data, 
 }
 
 async function enviarEmailCancelamento(emailCliente, nomeCliente, servico, data, horario) {
-  await transporter.sendMail({
-    from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <contato@pirulitodocorte.xyz>",
     to: emailCliente,
     subject: "Agendamento cancelado",
     html: `
@@ -52,8 +45,8 @@ async function enviarEmailCancelamento(emailCliente, nomeCliente, servico, data,
 }
 
 async function enviarEmailRecuperacao(emailCliente, link) {
-  await transporter.sendMail({
-    from: '"Barbearia Pirulito do Corte" <barbeariapirulitodocorte@gmail.com>',
+  await resend.emails.send({
+    from: "Barbearia Pirulito do Corte <contato@pirulitodocorte.xyz>",
     to: emailCliente,
     subject: "Recuperação de senha",
     html: `
