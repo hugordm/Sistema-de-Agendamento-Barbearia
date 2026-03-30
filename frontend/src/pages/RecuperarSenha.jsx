@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./Login.css";
 
+const API_URL = "https://sistema-de-agendamento-barbearia-1-oako.onrender.com";
+
+
 export default function RecuperarSenha() {
   const [email, setEmail] = useState("");
   const [mensagem, setMensagem] = useState("");

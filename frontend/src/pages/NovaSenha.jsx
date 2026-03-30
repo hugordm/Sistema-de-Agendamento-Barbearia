@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Login.css";
 
+const API_URL = "https://sistema-de-agendamento-barbearia-1-oako.onrender.com";
+
 export default function NovaSenha() {
   const [senha, setSenha] = useState("");
   const [confirmar, setConfirmar] = useState("");
