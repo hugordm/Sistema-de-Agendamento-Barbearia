@@ -38,7 +38,7 @@ export default function Cadastro() {
         <form className="cadastro-form" onSubmit={handleCadastro}>
           <input
             type="text"
-            placeholder="Nome completo"
+            placeholder="Nome"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           />

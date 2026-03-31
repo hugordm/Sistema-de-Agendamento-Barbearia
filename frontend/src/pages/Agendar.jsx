@@ -19,6 +19,13 @@ export default function Agendar() {
     "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
   ];
 
+  <input
+  type="date"
+  value={data}
+  onChange={handleDataChange}
+  min={new Date().toISOString().split("T")[0]}
+/>
+
   useEffect(() => {
     carregar();
   }, []);
