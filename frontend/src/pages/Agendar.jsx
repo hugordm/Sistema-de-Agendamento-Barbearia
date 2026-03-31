@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getServicos, criarAgendamento, getMeusAgendamentos, getConfiguracoes, cancelarAgendamento, getHorariosOcupados} from "../services/api";
+import { getServicos, criarAgendamento, getMeusAgendamentos, getConfiguracoes, cancelarAgendamento, getHorariosOcupados } from "../services/api";
 import "./Agendar.css";
 
 export default function Agendar() {
@@ -19,12 +19,7 @@ export default function Agendar() {
     "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
   ];
 
-  <input
-  type="date"
-  value={data}
-  onChange={handleDataChange}
-  min={new Date().toISOString().split("T")[0]}
-/>
+  const hoje = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     carregar();
@@ -70,17 +65,17 @@ export default function Agendar() {
   }
 
   async function handleDataChange(e) {
-  const dataSelecionada = e.target.value;
-  setData(dataSelecionada);
-  setHorario("");
+    const dataSelecionada = e.target.value;
+    setData(dataSelecionada);
+    setHorario("");
 
-  if (dataSelecionada) {
-    const ocupados = await getHorariosOcupados(dataSelecionada);
-    setHorariosOcupados(Array.isArray(ocupados) ? ocupados : []);
-  } else {
-    setHorariosOcupados([]);
+    if (dataSelecionada) {
+      const ocupados = await getHorariosOcupados(dataSelecionada);
+      setHorariosOcupados(Array.isArray(ocupados) ? ocupados : []);
+    } else {
+      setHorariosOcupados([]);
+    }
   }
-}
 
   function sair() {
     localStorage.removeItem("token");
@@ -125,20 +120,20 @@ export default function Agendar() {
               type="date"
               value={data}
               onChange={handleDataChange}
+              min={hoje}
             />
-            
-            
+
             <select value={horario} onChange={(e) => setHorario(e.target.value)}>
-  <option value="">Escolha um horário</option>
-  {horarios.map((h) => {
-    const ocupado = horariosOcupados.includes(h);
-    return (
-      <option key={h} value={h} disabled={ocupado}>
-        {ocupado ? `${h} — indisponível` : h}
-      </option>
-    );
-  })}
-</select>
+              <option value="">Escolha um horário</option>
+              {horarios.map((h) => {
+                const ocupado = horariosOcupados.includes(h);
+                return (
+                  <option key={h} value={h} disabled={ocupado}>
+                    {ocupado ? `${h} — indisponível` : h}
+                  </option>
+                );
+              })}
+            </select>
 
             <button type="submit">Agendar</button>
           </form>
